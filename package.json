@@ -1,12 +1,12 @@
 {
-	"name": "@byojs/--TODO--",
-	"description": "--TODO--",
-	"version": "0.0.0-TODO",
+	"name": "@byojs/scheduler",
+	"description": "Debounce scheduler",
+	"version": "0.0.0-preA",
 	"exports": {
-		"./": "./dist/--TODO--.mjs"
+		"./": "./dist/scheduler.mjs"
 	},
 	"browser": {
-		"@byojs/--TODO--": "./dist/--TODO--.mjs"
+		"@byojs/scheduler": "./dist/scheduler.mjs"
 	},
 	"scripts": {
 		"build:all": "node scripts/build-all.js",
@@ -25,14 +25,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/byojs/--TODO--.git"
+		"url": "git+https://github.com/byojs/scheduler.git"
 	},
 	"keywords": [],
 	"bugs": {
-		"url": "https://github.com/byojs/--TODO--/issues",
+		"url": "https://github.com/byojs/scheduler/issues",
 		"email": "--TODO--"
 	},
-	"homepage": "https://github.com/byojs/--TODO--",
-	"author": "--TODO--",
+	"homepage": "https://github.com/byojs/scheduler",
+	"author": "Kyle Simpson <getify@gmail.com>",
 	"license": "MIT"
 }

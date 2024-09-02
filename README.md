@@ -1,9 +1,9 @@
-# --TODO--
+# Scheduler
 
-[![npm Module](https://badge.fury.io/js/@byojs%2F--TODO--.svg)](https://www.npmjs.org/package/@byojs/--TODO--)
+[![npm Module](https://badge.fury.io/js/@byojs%2Fscheduler.svg)](https://www.npmjs.org/package/@byojs/scheduler)
 [![License](https://img.shields.io/badge/license-MIT-a1356a)](LICENSE.txt)
 
-**--TODO--** ... // TODO
+**Scheduler** ... // TODO
 
 ```js
 // TODO
@@ -11,21 +11,21 @@
 
 ----
 
-[Library Tests (Demo)](https://byojs.dev/--TODO--/)
+[Library Tests (Demo)](https://byojs.dev/scheduler/)
 
 ----
 
 ## Overview
 
-The main purpose of **--TODO--** is...
+The main purpose of **Scheduler** is... // TODO
 
 ## Deployment / Import
 
 ```cmd
-npm install @byojs/--TODO--
+npm install @byojs/scheduler
 ```
 
-The [**@byojs/--TODO--** npm package](https://npmjs.com/package/@byojs/--TODO--) includes a `dist/` directory with all files you need to deploy **--TODO--** (and its dependencies) into your application/project.
+The [**@byojs/scheduler** npm package](https://npmjs.com/package/@byojs/scheduler) includes a `dist/` directory with all files you need to deploy **Scheduler** (and its dependencies) into your application/project.
 
 **Note:** If you obtain this library via git instead of npm, you'll need to [build `dist/` manually](#re-building-dist) before deployment.
 
@@ -36,20 +36,20 @@ If you are using a bundler (Astro, Vite, Webpack, etc) for your web application,
 Just `import` like so:
 
 ```js
-import { /* TODO */ } from "@byojs/--TODO--";
+import { /* TODO */ } from "@byojs/scheduler";
 ```
 
 The bundler tool should pick up and find whatever files (and dependencies) are needed.
 
 ### Without using a bundler
 
-If you are not using a bundler (Astro, Vite, Webpack, etc) for your web application, and just deploying the contents of `dist/` as-is without changes (e.g., to `/path/to/js-assets/--TODO--/`), you'll need an [Import Map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) in your app's HTML:
+If you are not using a bundler (Astro, Vite, Webpack, etc) for your web application, and just deploying the contents of `dist/` as-is without changes (e.g., to `/path/to/js-assets/scheduler/`), you'll need an [Import Map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) in your app's HTML:
 
 ```html
 <script type="importmap">
 {
     "imports": {
-        "--TODO--": "/path/to/js-assets/--TODO--.mjs"
+        "scheduler": "/path/to/js-assets/scheduler/scheduler.mjs"
     }
 }
 </script>
@@ -58,14 +58,14 @@ If you are not using a bundler (Astro, Vite, Webpack, etc) for your web applicat
 Now, you'll be able to `import` the library in your app in a friendly/readable way:
 
 ```js
-import { /* TODO */ } from "--TODO--";
+import { /* TODO */ } from "scheduler";
 ```
 
-**Note:** If you omit the above *--TODO--* import-map entry, you can still `import` **--TODO--** by specifying the proper full path to the `--TODO--.mjs` file.
+**Note:** If you omit the above *scheduler* import-map entry, you can still `import` **Scheduler** by specifying the proper full path to the `scheduler.mjs` file.
 
-## --TODO-- API
+## Scheduler API
 
-The API provided by **--TODO--**...
+The API provided by **Scheduler**... // TODO
 
 ```js
 // .. TODO
@@ -88,7 +88,7 @@ npm run build:all
 
 This library only works in a browser, so its test suite must also be run in a browser.
 
-Visit [`https://byojs.dev/--TODO--/`](https://byojs.dev/--TODO--/) and click the "run tests" button.
+Visit [`https://byojs.dev/scheduler/`](https://byojs.dev/scheduler/) and click the "run tests" button.
 
 ### Run Locally
 
@@ -106,4 +106,4 @@ By default, the `test/test.js` file imports the code from the `src/*` directly. 
 
 [![License](https://img.shields.io/badge/license-MIT-a1356a)](LICENSE.txt)
 
-All code and documentation are (c) 2024 --TODO-- and released under the [MIT License](http://mit-license.org/). A copy of the MIT License [is also included](LICENSE.txt).
+All code and documentation are (c) 2024 Kyle Simpson and released under the [MIT License](http://getify.mit-license.org/). A copy of the MIT License [is also included](LICENSE.txt).

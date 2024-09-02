@@ -14,10 +14,8 @@ const PKG_ROOT_DIR = path.join(__dirname,"..");
 const SRC_DIR = path.join(PKG_ROOT_DIR,"src");
 const MAIN_COPYRIGHT_HEADER = path.join(SRC_DIR,"copyright-header.txt");
 const NODE_MODULES_DIR = path.join(PKG_ROOT_DIR,"node_modules");
-const TODO_DIST = path.join(NODE_MODULES_DIR,"--TODO--","dist","--TODO--");
 
 const DIST_DIR = path.join(PKG_ROOT_DIR,"dist");
-const DIST_EXTERNAL_DIR = path.join(DIST_DIR,"external");
 
 
 main().catch(console.error);
@@ -30,9 +28,8 @@ async function main() {
 
 	// try to make various dist/ directories, if needed
 	for (let dir of [
-			DIST_DIR,
-			DIST_EXTERNAL_DIR,
-		]) {
+		DIST_DIR,
+	]) {
 		if (!(await safeMkdir(dir))) {
 			throw new Error(`Target directory (${dir}) does not exist and could not be created.`);
 		}
@@ -62,14 +59,6 @@ async function main() {
 			filename.replace(/\.js$/,".mjs")
 		),
 		/*skipPatterns=*/[ "**/*.txt", "**/*.json", "**/external" ]
-	);
-
-	// build dist/external/*
-	await buildFiles(
-		[ TODO_DIST, ],
-		path.dirname(TODO_DIST),
-		DIST_EXTERNAL_DIR,
-		(contents,outputPath) => ({ contents, outputPath, })
 	);
 
 	console.log("Complete.");
