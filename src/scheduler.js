@@ -3,7 +3,7 @@ export default Scheduler;
 
 // ***********************
 
-function Scheduler(debounceMin,throttleMax,leading = false) {
+function Scheduler(debounceMin,throttleMax = Infinity,leading = false) {
 	throttleMax = Math.max(debounceMin,throttleMax);
 	var entries = new WeakMap();
 

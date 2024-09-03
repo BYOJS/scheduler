@@ -1,7 +1,7 @@
 {
 	"name": "@byojs/scheduler",
 	"description": "Throttle/debounce scheduler",
-	"version": "0.0.0-preA",
+	"version": "0.0.0-20240903035700",
 	"exports": {
 		"./": "./dist/scheduler.mjs"
 	},
