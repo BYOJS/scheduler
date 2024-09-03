@@ -3,7 +3,8 @@ export default Scheduler;
 
 // ***********************
 
-function Scheduler(debounceMin,throttleMax) {
+function Scheduler(debounceMin,throttleMax,leading = false) {
+	throttleMax = Math.max(debounceMin,throttleMax);
 	var entries = new WeakMap();
 
 	return schedule;
@@ -27,38 +28,64 @@ function Scheduler(debounceMin,throttleMax) {
 
 		var now = Date.now();
 
-		if (!entry.timer) {
+		if (entry.timer == null) {
 			entry.last = now;
 		}
 
-		if (
+		// fire first, then debounce?
+		if (leading) {
+			if (
+				// no timer running yet?
+				entry.timer == null ||
+
+				// NO room left to debounce while still under the throttle-max?
+				!((now - entry.last) <= throttleMax)
+			) {
+				clearTimer(entry);
+				fn();
+				entry.timer = setTimeout(clearTimer,debounceMin,entry);
+			}
+			else {
+				setTimer(fn,entry,now);
+			}
+		}
+		// fire first only *after* at least debounce minimum
+		else if (
 			// no timer running yet?
 			entry.timer == null ||
+
 			// room left to debounce while still under the throttle-max?
 			(now - entry.last) < throttleMax
 		) {
-			if (entry.timer) {
-				clearTimeout(entry.timer);
-			}
-
-			let time = Math.min(debounceMin,Math.max(0,(entry.last + throttleMax) - now));
-			entry.timer = setTimeout(run,time,fn,entry);
+			setTimer(fn,entry,now);
 		}
 
 		if (!entry.cancelFn) {
 			entry.cancelFn = function cancel(){
-				if (entry.timer) {
-					clearTimeout(entry.timer);
-					entry.timer = entry.cancelFn = null;
-				}
+				clearTimer(entry);
+				entry.cancel = null;
 			};
 		}
 		return entry.cancelFn;
 	}
 
+	function setTimer(fn,entry,now) {
+		clearTimer(entry);
+		var time = Math.min(debounceMin,Math.max(0,(entry.last + throttleMax) - now));
+		entry.timer = setTimeout(run,time,fn,entry);
+	}
+
 	function run(fn,entry) {
-		entry.timer = entry.cancelFn = null;
+		clearTimer(entry);
+		entry.cancelFn = null;
 		entry.last = Date.now();
 		fn();
+	}
+
+	function clearTimer(entry) {
+		if (entry.timer != null) {
+			clearTimeout(entry.timer);
+		}
+		entry.timer = null;
 	}
 }

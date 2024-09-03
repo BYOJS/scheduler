@@ -26,8 +26,57 @@ async function ready() {
 }
 
 async function runTests() {
+	testResultsEl.innerHTML = "Running... please wait.";
+
+	var [ leadingResult, trailingResult, ] = await Promise.all([
+		runLeadingTests(),
+		runTrailingTests(),
+	]);
+
+	testResultsEl.innerHTML = `${leadingResult}<br>${trailingResult}`;
+}
+
+async function runLeadingTests() {
 	var results = [];
-	var waiter = Scheduler(100,500);
+	var waiter = Scheduler(100,500,/*leading=*/true);
+
+	waiter(logResult);
+	await timeout(110);
+	waiter(logResult);
+	waiter(logResult);
+	await timeout(50);
+	waiter(logResult);
+	waiter(logResult);
+	waiter(logResult);
+	await timeout(500);
+
+	for (let i = 0; i < 12; i++) {
+		waiter(logResult);
+		await timeout(60);
+	}
+
+	await timeout(500);
+
+	var EXPECTED = 7;
+	var FOUND = results.length;
+	return (
+		`(Leading) ${
+			results.length == EXPECTED ?
+				"PASSED." :
+				`FAILED: expected ${EXPECTED}, found ${FOUND}`
+		}`
+	);
+
+	// ***********************
+
+	function logResult() {
+		results.push("result");
+	}
+}
+
+async function runTrailingTests() {
+	var results = [];
+	var waiter = Scheduler(100,500,/*leading=*/false);
 
 	testResultsEl.innerHTML = "Running... please wait.";
 
@@ -50,8 +99,12 @@ async function runTests() {
 
 	var EXPECTED = 6;
 	var FOUND = results.length;
-	testResultsEl.innerHTML = (
-		results.length == EXPECTED ? "PASSED." : `FAILED: expected ${EXPECTED}, found ${FOUND}`
+	return (
+		`(Trailing) ${
+			results.length == EXPECTED ?
+				"PASSED." :
+				`FAILED: expected ${EXPECTED}, found ${FOUND}`
+		}`
 	);
 
 	// ***********************
