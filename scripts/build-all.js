@@ -47,7 +47,7 @@ async function main() {
 			.replace(/#YEAR#/g,(new Date()).getFullYear())
 	);
 
-	// build src/* to bundlers/*
+	// build src/* to dist/*
 	await buildFiles(
 		recursiveReadDir(SRC_DIR),
 		SRC_DIR,

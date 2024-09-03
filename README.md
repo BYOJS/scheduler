@@ -103,6 +103,8 @@ This function receives one to three arguments, to initialize a scheduler instanc
 To initialize an unbounded-debounce scheduler (in *leading* or *trailing* mode):
 
 ```js
+import Scheduler from "..";
+
 // leading unbounded debounce
 var debouncer1 = Scheduler(250);
 
@@ -117,6 +119,8 @@ var debouncer2 = Scheduler(250,Infinity,/*leading=*/false);
 To initialize a bounded-debounce scheduler (in *leading* or *trailing* mode):
 
 ```js
+import Scheduler from "..";
+
 // leading bounded (400ms) debounce
 var debouncer3 = Scheduler(250,400);
 
@@ -129,6 +133,8 @@ var debouncer4 = Scheduler(250,400,/*leading=*/false);
 To initialize a throttle scheduler (in *leading* or *trailing* mode):
 
 ```js
+import Scheduler from "..";
+
 // leading throttle
 var throttler1 = Scheduler(250,250);
 
@@ -156,28 +162,28 @@ debouncer1(someTask);
 
 In this snippet, `someTask` will only be called once (with no arguments), ~250ms after the last call (within the interval) to `debouncer1()`.
 
-You can share the same scheduler instance can for debouncing/throttling as many different functions as desired, assuming the same timing settings should apply for each of them.
+You *can* share the same scheduler instance can for debouncing/throttling as many different functions as desired, assuming the same timing settings should apply for each of them.
 
 **Warning:** The internal tracking of repeated and async scheduled calls is based on function reference identity. If you pass an inline function expression (such as an `=>` arrow), the function reference will be different each time, and will be treated as entirely separate functions -- thereby defeating the debouncing/throttling. Make sure to use the same stable function reference for all scheduling-related invocations of the scheduler instance function.
 
 ### Canceling a scheduled task
 
-The scheduler instance (e.g., `debouncer1` from above) returns yet another function, which is a *canceler*:
+The scheduler instance (e.g., `debouncer1` from above) returns yet another function, which is a *canceller*:
 
 ```js
-var canceler = debouncer1(someTask);
+var canceller = debouncer1(someTask);
 
 // later (but within 250ms of previous call)
-canceler();
+canceller();
 ```
 
-If `canceler()` (as shown) is called before the debounced `someTask()` function is actually called, that debounced scheduling will be canceled. The same *canceler* will be returned for all subsequent `debouncer1()` calls **within the same interval**:
+If `canceller()` (as shown) is called before the debounced `someTask()` function is actually called, that debounced scheduling will be canceled. The same *canceller* will be returned for all subsequent `debouncer1()` calls **within the same interval**:
 
 ```js
 debouncer1(someTask) === debouncer1(someTask);      // true
 ```
 
-Since the *canceler* function is stable (within the same interval), it's safe to preserve a reference to that function, to use at any time during that interval. Once the interval transpires, the function becomes *dead* (no-op), and should be discarded.
+Since the *canceller* function is stable (within the same interval), it's safe to preserve a reference to that function, to use at any time during that interval. Once the interval transpires, the function becomes *dead* (no-op), and should be discarded.
 
 ## Re-building `dist/*`
 

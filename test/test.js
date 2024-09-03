@@ -76,36 +76,43 @@ async function runLeadingTests() {
 
 async function runTrailingTests() {
 	var results = [];
-	var waiter = Scheduler(100,500,/*leading=*/false);
-
 	testResultsEl.innerHTML = "Running... please wait.";
 
-	waiter(logResult);
-	await timeout(110);
-	waiter(logResult);
-	waiter(logResult);
-	await timeout(50);
-	waiter(logResult);
-	waiter(logResult);
-	waiter(logResult);
-	await timeout(500);
+	try {
+		let waiter = Scheduler(100,500,/*leading=*/false);
 
-	for (let i = 0; i < 30; i++) {
 		waiter(logResult);
-		await timeout(60);
+		await timeout(110);
+		waiter(logResult);
+		waiter(logResult);
+		await timeout(50);
+		waiter(logResult);
+		waiter(logResult);
+		waiter(logResult);
+		await timeout(500);
+
+		for (let i = 0; i < 30; i++) {
+			waiter(logResult);
+			await timeout(60);
+		}
+
+		await timeout(500);
+
+		let EXPECTED = 6;
+		let FOUND = results.length;
+		return (
+			`(Trailing) ${
+				results.length == EXPECTED ?
+					"PASSED." :
+					`FAILED: expected ${EXPECTED}, found ${FOUND}`
+			}`
+		);
 	}
-
-	await timeout(500);
-
-	var EXPECTED = 6;
-	var FOUND = results.length;
-	return (
-		`(Trailing) ${
-			results.length == EXPECTED ?
-				"PASSED." :
-				`FAILED: expected ${EXPECTED}, found ${FOUND}`
-		}`
-	);
+	catch (err) {
+		logError(err);
+		console.log("results",results);
+		testResultsEl.innerHTML = "FAILED (see console)";
+	}
 
 	// ***********************
 
