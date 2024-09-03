@@ -1,7 +1,7 @@
 {
 	"name": "@byojs/scheduler",
 	"description": "Throttle/debounce scheduler",
-	"version": "0.0.9",
+	"version": "0.9.0",
 	"exports": {
 		"./": "./dist/scheduler.mjs"
 	},
@@ -27,10 +27,16 @@
 		"type": "git",
 		"url": "git+https://github.com/byojs/scheduler.git"
 	},
-	"keywords": [],
+	"keywords": [
+		"debounce",
+		"throttle",
+		"scheduling",
+		"task",
+		"async"
+	],
 	"bugs": {
 		"url": "https://github.com/byojs/scheduler/issues",
-		"email": "--TODO--"
+		"email": "getify@gmail.com"
 	},
 	"homepage": "https://github.com/byojs/scheduler",
 	"author": "Kyle Simpson <getify@gmail.com>",

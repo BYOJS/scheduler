@@ -3,8 +3,8 @@ export default Scheduler;
 
 // ***********************
 
-function Scheduler(debounceMin,throttleMax = Infinity,leading = false) {
-	throttleMax = Math.max(debounceMin,throttleMax);
+function Scheduler(initialDelay,maxDelay = Infinity,leading = false) {
+	maxDelay = Math.max(initialDelay,maxDelay);
 	var entries = new WeakMap();
 
 	return schedule;
@@ -39,11 +39,11 @@ function Scheduler(debounceMin,throttleMax = Infinity,leading = false) {
 				entry.timer == null ||
 
 				// NO room left to debounce while still under the throttle-max?
-				!((now - entry.last) <= throttleMax)
+				!((now - entry.last) <= maxDelay)
 			) {
 				clearTimer(entry);
 				fn();
-				entry.timer = setTimeout(clearTimer,debounceMin,entry);
+				entry.timer = setTimeout(clearTimer,initialDelay,entry);
 			}
 			else {
 				setTimer(fn,entry,now);
@@ -55,7 +55,7 @@ function Scheduler(debounceMin,throttleMax = Infinity,leading = false) {
 			entry.timer == null ||
 
 			// room left to debounce while still under the throttle-max?
-			(now - entry.last) < throttleMax
+			(now - entry.last) < maxDelay
 		) {
 			setTimer(fn,entry,now);
 		}
@@ -71,7 +71,7 @@ function Scheduler(debounceMin,throttleMax = Infinity,leading = false) {
 
 	function setTimer(fn,entry,now) {
 		clearTimer(entry);
-		var time = Math.min(debounceMin,Math.max(0,(entry.last + throttleMax) - now));
+		var time = Math.min(initialDelay,Math.max(0,(entry.last + maxDelay) - now));
 		entry.timer = setTimeout(run,time,fn,entry);
 	}
 
