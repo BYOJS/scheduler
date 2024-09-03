@@ -13,7 +13,6 @@ var terser = require("terser");
 const PKG_ROOT_DIR = path.join(__dirname,"..");
 const SRC_DIR = path.join(PKG_ROOT_DIR,"src");
 const MAIN_COPYRIGHT_HEADER = path.join(SRC_DIR,"copyright-header.txt");
-const NODE_MODULES_DIR = path.join(PKG_ROOT_DIR,"node_modules");
 
 const DIST_DIR = path.join(PKG_ROOT_DIR,"dist");
 
