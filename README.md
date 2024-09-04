@@ -28,13 +28,13 @@ Both scheduling schemes reduce how many repeated calls to a single function will
 
 ### Throttling
 
-Throttling prevents a repeated function call from being processed more than once per defined interval of time (e.g., 100ms); an interval timer is started with the *first call* (which resets after each interval transpires).
+[Throttling](https://css-tricks.com/debouncing-throttling-explained-examples/#aa-throttle) prevents a repeated function call from being processed more than once per defined interval of time (e.g., 100ms); an interval timer is started with the *first call* (which resets after each interval transpires).
 
 With leading throttling, the initial call is processed immediately, and any subsequent call attempts, during the interval, will be ignored. With trailing throttling, only the last call is processed, *after* the full interval has transpired (since the first attempted call).
 
 ### Debouncing
 
-Debouncing resets the delay interval with each attempted call of a function, meaning that the delay of processing an attempted call will continue to increase (unbounded), with each subsequent call attempt during the defined interval.
+[Debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#aa-debounce) resets the delay interval with each attempted call of a function, meaning that the delay of processing an attempted call will continue to increase (unbounded), with each subsequent call attempt during the defined interval.
 
 With leading debouncing, the initial call is immediately processed, after which subsequent calls are debounced; once a full interval transpires without attempted calls, the most recent call is processed. With trailing debouncing, no initial call is processed, and every call is debounced.
 
