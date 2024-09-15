@@ -1,4 +1,4 @@
-/*! Scheduler: #FILENAME#
+/*! byojs/Scheduler: #FILENAME#
     v#VERSION# (c) #YEAR# Kyle Simpson
     MIT License: http://getify.mit-license.org
 */
